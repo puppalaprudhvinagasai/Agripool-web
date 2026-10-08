@@ -4,13 +4,10 @@
 .env.*.local
 *.env
 
-# SQLite local runtime database files
-*.db
+# SQLite temporary journal and write-ahead log files
 *.db-journal
 *.db-shm
 *.db-wal
-*.sqlite
-*.sqlite3
 
 # Dependencies
 node_modules/
