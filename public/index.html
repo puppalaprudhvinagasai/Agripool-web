@@ -19,6 +19,7 @@
           <h2>AgriPool</h2>
           <span>Kisan Vikas FPO</span>
         </div>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" onclick="closeMobileSidebar()" aria-label="Close navigation" title="Close sidebar">✕</button>
       </div>
 
       <div class="sidebar-role-indicator">
@@ -101,11 +102,19 @@
       </div>
     </aside>
 
+    <!-- Mobile Drawer Backdrop Overlay -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobileSidebar()"></div>
+
     <!-- Main Application Layout -->
     <div class="main-layout">
       <!-- Top Sticky Header Bar -->
       <header class="top-header">
         <div class="header-left">
+          <button class="mobile-menu-toggle" id="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="Toggle navigation menu" title="Open navigation">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
           <div class="page-title-wrap">
             <h1 id="header-page-title">Phase 1 Pilot Dashboard</h1>
           </div>

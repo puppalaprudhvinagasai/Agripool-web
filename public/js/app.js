@@ -155,8 +155,40 @@ function updateSidebarUI() {
   }
 }
 
+// Mobile Drawer Navigation Controllers
+function toggleMobileSidebar() {
+  const sidebar = document.getElementById('app-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (!sidebar) return;
+  const isOpen = sidebar.classList.toggle('open');
+  if (backdrop) {
+    if (isOpen) {
+      backdrop.classList.add('active');
+    } else {
+      backdrop.classList.remove('active');
+    }
+  }
+}
+
+function closeMobileSidebar() {
+  const sidebar = document.getElementById('app-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar) sidebar.classList.remove('open');
+  if (backdrop) backdrop.classList.remove('active');
+}
+
+// Close drawer on Escape key press
+if (typeof window !== 'undefined') {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileSidebar();
+  });
+}
+
 // Navigation Router with Role-Based Route Protection (Requirement #17)
 async function navigateTo(route, updateHistory = true) {
+  // Always close mobile navigation drawer on route change
+  closeMobileSidebar();
+
   const canonical = getCanonicalRoute(route);
   currentRoute = canonical;
 
@@ -844,3 +876,5 @@ window.handleOnboardFarmerSubmit = handleOnboardFarmerSubmit;
 window.handleCreateLotSubmit = handleCreateLotSubmit;
 window.initDatabaseStatusCheck = initDatabaseStatusCheck;
 window.initMarketTicker = initMarketTicker;
+window.toggleMobileSidebar = toggleMobileSidebar;
+window.closeMobileSidebar = closeMobileSidebar;
