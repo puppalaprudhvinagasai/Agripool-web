@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "build": "node -e \"console.log('AgriPool build verified')\""
+  },
+  "engines": {
+    "node": ">=22.x"
   },
   "keywords": [
     "agriculture",

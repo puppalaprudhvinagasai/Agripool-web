@@ -77,7 +77,7 @@ function parseBody(req) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
+async function handleRequest(req, res) {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
   const method = req.method;
@@ -773,12 +773,18 @@ async function attemptBackgroundMarketSync() {
     res.writeHead(200, { 'Content-Type': contentType });
     fs.createReadStream(filePath).pipe(res);
   });
-});
+}
 
-server.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(`  🌾 AgriPool Agriculture Aggregation Platform Running`);
-  console.log(`  🔗 Local URL: http://localhost:${PORT}`);
-  console.log(`  🎯 Pilot Mode: Kisan Vikas FPO (Krishna/Guntur, AP)`);
-  console.log(`=======================================================`);
-});
+const server = http.createServer(handleRequest);
+
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(`  🌾 AgriPool Agriculture Aggregation Platform Running`);
+    console.log(`  🔗 Local URL: http://localhost:${PORT}`);
+    console.log(`  🎯 Pilot Mode: Kisan Vikas FPO (Krishna/Guntur, AP)`);
+    console.log(`=======================================================`);
+  });
+}
+
+module.exports = { server, handleRequest };

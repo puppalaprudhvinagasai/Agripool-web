@@ -3,13 +3,29 @@ const { DatabaseSync } = require('node:sqlite');
 const path = require('node:path');
 const fs = require('node:fs');
 
-const DB_PATH = path.join(__dirname, '..', 'agripool.db');
+function getDbPath() {
+  const defaultPath = path.join(__dirname, '..', 'agripool.db');
+  if (process.env.VERCEL) {
+    const tmpPath = path.join('/tmp', 'agripool.db');
+    if (!fs.existsSync(tmpPath) && fs.existsSync(defaultPath)) {
+      try {
+        fs.copyFileSync(defaultPath, tmpPath);
+        console.log('[Vercel Serverless] Initialized /tmp/agripool.db from deployment bundle');
+      } catch (e) {
+        console.warn('[Vercel Serverless] Could not copy bundle DB:', e.message);
+      }
+    }
+    return tmpPath;
+  }
+  return defaultPath;
+}
 
 let dbInstance = null;
 
 function getDatabase() {
   if (!dbInstance) {
-    dbInstance = new DatabaseSync(DB_PATH);
+    const dbPath = getDbPath();
+    dbInstance = new DatabaseSync(dbPath);
     dbInstance.exec('PRAGMA foreign_keys = ON;');
     dbInstance.exec('PRAGMA journal_mode = WAL;');
     initSchema(dbInstance);
