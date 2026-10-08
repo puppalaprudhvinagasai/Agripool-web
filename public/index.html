@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AgriPool - Software-first agriculture produce aggregation, pooling, and settlement platform for smallholder farmers and FPOs">
+  <title>AgriPool Platform — Agricultural Produce Aggregation & Settlement</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/print.css" media="print">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20%220%22%20100%20100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-badge">🌾</div>
+        <div class="logo-text">
+          <h2>AgriPool</h2>
+          <span>Kisan Vikas FPO</span>
+        </div>
+      </div>
+
+      <div class="sidebar-role-indicator">
+        <div class="role-badge-label">Active Persona Role</div>
+        <div class="role-badge-title" id="current-role-title">FPO Admin</div>
+      </div>
+
+      <nav class="sidebar-nav" id="sidebar-nav-container">
+        <a class="nav-item" data-route="home" onclick="navigateTo('home')">
+          <span class="nav-icon">🏠</span>
+          <span>Home</span>
+        </a>
+        <a class="nav-item" data-route="fpo" onclick="navigateTo('fpo')">
+          <span class="nav-icon">🎯</span>
+          <span>FPO Dashboard</span>
+          <span class="nav-badge">Pilot</span>
+        </a>
+        <a class="nav-item" data-route="farmers" onclick="navigateTo('farmers')">
+          <span class="nav-icon">👨‍🌾</span>
+          <span>Farmers</span>
+        </a>
+        <a class="nav-item" data-route="crops" onclick="navigateTo('crops')">
+          <span class="nav-icon">🌾</span>
+          <span>Crops</span>
+        </a>
+        <a class="nav-item" data-route="lots" onclick="navigateTo('lots')">
+          <span class="nav-icon">🏷️</span>
+          <span>Lots</span>
+        </a>
+        <a class="nav-item" data-route="pools" onclick="navigateTo('pools')">
+          <span class="nav-icon">🤝</span>
+          <span>Pools</span>
+        </a>
+        <a class="nav-item" data-route="pickup" onclick="navigateTo('pickup')">
+          <span class="nav-icon">🚚</span>
+          <span>Pickup</span>
+        </a>
+        <a class="nav-item" data-route="storage" onclick="navigateTo('storage')">
+          <span class="nav-icon">🏭</span>
+          <span>Storage</span>
+        </a>
+        <a class="nav-item" data-route="buyers" onclick="navigateTo('buyers')">
+          <span class="nav-icon">🏢</span>
+          <span>Buyers</span>
+        </a>
+        <a class="nav-item" data-route="orders" onclick="navigateTo('orders')">
+          <span class="nav-icon">🛒</span>
+          <span>Orders</span>
+        </a>
+        <a class="nav-item" data-route="payments" onclick="navigateTo('payments')">
+          <span class="nav-icon">💰</span>
+          <span>Payments</span>
+        </a>
+        <a class="nav-item" data-route="reports" onclick="navigateTo('reports')">
+          <span class="nav-icon">📊</span>
+          <span>Reports</span>
+        </a>
+        <a class="nav-item" data-route="notifications" onclick="navigateTo('notifications')">
+          <span class="nav-icon">🔔</span>
+          <span>Notifications</span>
+        </a>
+        <a class="nav-item" data-route="activity" onclick="navigateTo('activity')">
+          <span class="nav-icon">🛡️</span>
+          <span>Activity</span>
+        </a>
+        <a class="nav-item" data-route="growth-plan" onclick="navigateTo('growth-plan')">
+          <span class="nav-icon">🗺️</span>
+          <span>Growth Plan</span>
+        </a>
+        <a class="nav-item" data-route="settings" onclick="navigateTo('settings')">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="pilot-tag">
+          🚀 PILOT VALIDATION ACTIVE
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Application Layout -->
+    <div class="main-layout">
+      <!-- Top Sticky Header Bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <div class="page-title-wrap">
+            <h1 id="header-page-title">Phase 1 Pilot Dashboard</h1>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Active User Badge & Logout -->
+          <div class="header-user-badge" id="header-user-badge" style="display: flex; align-items: center; gap: 8px; background: #f8fafc; border: 1px solid var(--border); padding: 6px 14px; border-radius: var(--radius-full); font-size: 13.5px;">
+            <span style="font-size: 16px;">👤</span>
+            <span id="header-user-display" style="font-weight: 600;">Account</span>
+          </div>
+
+          <!-- Logout Button -->
+          <button onclick="handleLogout()" class="btn btn-outline btn-sm" id="header-logout-btn" style="color: #dc2626; border-color: #fca5a5; font-weight: 700;" title="Sign out of your account">
+            🚪 Logout
+          </button>
+        </div>
+      </header>
+
+      <!-- Horizontal Live Market Scrolling Ticker (Requirement #10) -->
+      <div class="live-market-ticker-banner" id="live-market-ticker-banner">
+        <div class="ticker-badge">
+          <span class="live-pulse-dot"></span>
+          <span>LIVE MARKET</span>
+          <span class="ticker-source-tag" id="ticker-source-tag">Government of India / data.gov.in</span>
+        </div>
+        <div class="ticker-track-container" id="ticker-track-container">
+          <div class="ticker-track" id="ticker-track-content">
+            <!-- Dynamically populated right-to-left scrolling items -->
+            <span class="ticker-item"><span class="ticker-crop-name">Streaming Live Mandi Feed...</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Page Body -->
+      <main class="page-body" id="app-main-content">
+        <!-- Rendered by components -->
+      </main>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- 1. Onboard Farmer Modal -->
+  <div class="modal-overlay" id="onboard-farmer-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">👤 Assisted Farmer Onboarding (FPO & SHG)</h3>
+        <button onclick="closeModal('onboard-farmer-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleOnboardFarmerSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Farmer Full Name *</label>
+              <input type="text" class="form-control" id="farmer-form-name" placeholder="e.g. Venkata Subba Rao" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mobile Number *</label>
+              <input type="tel" class="form-control" id="farmer-form-mobile" placeholder="+91 98480 12345" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Village Cluster *</label>
+              <select class="form-control" id="farmer-form-village" required>
+                <option value="1">Kankipadu (Krishna)</option>
+                <option value="2">Thotlavalluru (Krishna)</option>
+                <option value="3">Gudivada Rural (Krishna)</option>
+                <option value="4">Mangalagiri Rural (Guntur)</option>
+                <option value="5">Tenali North (Guntur)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Farm Holding Size (Acres) *</label>
+              <input type="number" step="0.1" class="form-control" id="farmer-form-acres" value="2.5" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Survey / Revenue Patta Number</label>
+            <input type="text" class="form-control" id="farmer-form-survey" placeholder="e.g. SY-142/3">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Bank Account Number (For NEFT Payouts) *</label>
+              <input type="text" class="form-control" id="farmer-form-bank" placeholder="e.g. SBIN00041289102" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">IFSC Code *</label>
+              <input type="text" class="form-control" id="farmer-form-ifsc" value="SBIN0004128" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('onboard-farmer-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Register Farmer Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Create Digital Lot Modal -->
+  <div class="modal-overlay" id="create-lot-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🏷️ Issue Digital Produce Lot Passport</h3>
+        <button onclick="closeModal('create-lot-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleCreateLotSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Registered Farmer *</label>
+            <select class="form-control" id="lot-form-farmer-id" required>
+              <!-- Filled via app.js -->
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Produce Commodity *</label>
+              <select class="form-control" id="lot-form-produce" required>
+                <option value="Guntur Sannam Chilli">Guntur Sannam Chilli</option>
+                <option value="Nizamabad Turmeric">Nizamabad Turmeric</option>
+                <option value="Maize (Hybrid)">Maize (Hybrid)</option>
+                <option value="Black Gram (Urad)">Black Gram (Urad)</option>
+                <option value="Cotton (Bt-II)">Cotton (Bt-II)</option>
+                <option value="BPT 5204 Paddy">BPT 5204 Paddy</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Variety / Commercial Sub-Type</label>
+              <input type="text" class="form-control" id="lot-form-variety" value="Teja S17 Special" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Estimated Quantity (kg) *</label>
+              <input type="number" step="0.1" class="form-control" id="lot-form-quantity" value="250.0" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Actual Scale Weight (kg) [Optional]</label>
+              <input type="number" step="0.1" class="form-control" id="lot-form-actual-weight" placeholder="Leave blank if weighing later">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Initial Assaying Grade</label>
+            <select class="form-control" id="lot-form-grade">
+              <option value="GRADE_A">Grade A (Premium Quality)</option>
+              <option value="GRADE_B">Grade B (Standard Commercial)</option>
+              <option value="EXPORT_GRADE">Export Grade</option>
+              <option value="FAQ">FAQ (Fair Average Quality)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('create-lot-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Issue Digital Lot Passport</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Digital Lot Passport Detail Modal -->
+  <div class="modal-overlay" id="passport-modal">
+    <div class="modal-card" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 class="modal-title">🏷️ Digital Lot Passport Certificate</h3>
+        <button onclick="closeModal('passport-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="passport-modal-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Pool Details Modal -->
+  <div class="modal-overlay" id="pool-details-modal">
+    <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-header">
+        <h3 class="modal-title">📦 Aggregated Pool Inspection</h3>
+        <button onclick="closeModal('pool-details-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="pool-details-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Create Pickup Modal -->
+  <div class="modal-overlay" id="pickup-create-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🚚 Schedule Consolidated Pickup Request</h3>
+        <button onclick="closeModal('pickup-create-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="pickup-modal-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Update Pickup Modal -->
+  <div class="modal-overlay" id="pickup-update-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🚚 Update Logistics Dispatch</h3>
+        <button onclick="closeModal('pickup-update-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="pickup-update-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Storage Assign Modal -->
+  <div class="modal-overlay" id="storage-assign-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🏭 Assign Storage Facility & Bay Reservation</h3>
+        <button onclick="closeModal('storage-assign-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="storage-modal-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Buyer Purchase Order Modal -->
+  <div class="modal-overlay" id="buyer-order-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">💼 Place Institutional Purchase Order (PO)</h3>
+        <button onclick="closeModal('buyer-order-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="buyer-order-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Settlement Detail Modal -->
+  <div class="modal-overlay" id="settlement-detail-modal">
+    <div class="modal-card" style="max-width: 820px;">
+      <div class="modal-header">
+        <h3 class="modal-title">🧾 Audited Settlement Ledger</h3>
+        <button onclick="closeModal('settlement-detail-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="settlement-detail-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. Generate Settlement Modal -->
+  <div class="modal-overlay" id="generate-settlement-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">⚡ Generate Settlement & Calculate Waterfall</h3>
+        <button onclick="closeModal('generate-settlement-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="generate-settlement-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. Advance Status Modal -->
+  <div class="modal-overlay" id="advance-update-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">💳 Update Partner Working Capital Advance</h3>
+        <button onclick="closeModal('advance-update-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="advance-update-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. Master Acceptance Test Modal -->
+  <div class="modal-overlay" id="acceptance-modal">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 class="modal-title">⚡ 1-Click Master Acceptance Scenario Runner</h3>
+        <button onclick="closeModal('acceptance-modal')" class="btn-icon">✕</button>
+      </div>
+      <div class="modal-body" id="acceptance-modal-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. Create Crop Modal -->
+  <div class="modal-overlay" id="create-crop-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🌾 Register Farmer Crop Declaration</h3>
+        <button onclick="closeModal('create-crop-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleCreateCropSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Registered Farmer *</label>
+            <select class="form-control" id="crop-form-farmer-id" required>
+              <!-- Dynamically populated for logged-in user -->
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Crop Name *</label>
+              <select class="form-control" id="crop-form-name" required>
+                <option value="Guntur Sannam Chilli" selected>Guntur Sannam Chilli</option>
+                <option value="Nizamabad Turmeric">Nizamabad Turmeric</option>
+                <option value="Maize (Hybrid)">Maize (Hybrid)</option>
+                <option value="Black Gram (Urad)">Black Gram (Urad)</option>
+                <option value="Cotton (Bt-II)">Cotton (Bt-II)</option>
+                <option value="BPT 5204 Paddy">BPT 5204 Paddy</option>
+                <option value="Tomato (Arka Rakshak)">Tomato (Arka Rakshak)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Crop Category</label>
+              <select class="form-control" id="crop-form-category">
+                <option value="Spices" selected>Spices & Commercial</option>
+                <option value="Cereals">Cereals & Grains</option>
+                <option value="Pulses">Pulses & Legumes</option>
+                <option value="Horticulture">Horticulture / Vegetables</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Declared Quantity (kg) *</label>
+              <input type="number" step="1" class="form-control" id="crop-form-quantity" value="250" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expected Harvest Date *</label>
+              <input type="date" class="form-control" id="crop-form-harvest-date" value="2026-10-15" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Quality / Grade</label>
+              <select class="form-control" id="crop-form-quality">
+                <option value="GRADE_A" selected>Grade A (Premium Quality)</option>
+                <option value="GRADE_B">Grade B (Standard Commercial)</option>
+                <option value="EXPORT_GRADE">Export Grade</option>
+                <option value="FAQ">FAQ (Fair Average Quality)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Village / Location</label>
+              <input type="text" class="form-control" id="crop-form-village" value="Tenali North" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Storage Status</label>
+            <select class="form-control" id="crop-form-storage">
+              <option value="On Farm" selected>On Farm (Awaiting FPO Collection)</option>
+              <option value="Village Yard">Village Aggregation Yard</option>
+              <option value="FPO Hub">FPO Primary Processing Hub</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('create-crop-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">+ Save Crop Declaration</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 14. Add Bulk Buyer Modal (Section 6 & Step 5) -->
+  <div class="modal-overlay" id="add-bulk-buyer-modal">
+    <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-header">
+        <h3 class="modal-title">🏢 Register Verified Bulk Buyer</h3>
+        <button onclick="closeModal('add-bulk-buyer-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleAddBulkBuyerSubmit(event, false)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Company / Organization Name *</label>
+              <input type="text" class="form-control" id="buyer-form-company" placeholder="e.g. ITC Agri Business Division" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Person *</label>
+              <input type="text" class="form-control" id="buyer-form-contact" placeholder="e.g. Rajesh Sharma (VP Sourcing)" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" class="form-control" id="buyer-form-phone" placeholder="+91 98480 99887" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" id="buyer-form-email" placeholder="procurement@company.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" id="buyer-form-address" placeholder="Plot 42, Spices Industrial Estate">
+            </div>
+            <div class="form-group">
+              <label class="form-label">City *</label>
+              <input type="text" class="form-control" id="buyer-form-city" value="Guntur" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">State *</label>
+              <input type="text" class="form-control" id="buyer-form-state" value="Andhra Pradesh" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Buyer Type</label>
+              <select class="form-control" id="buyer-form-type">
+                <option value="Agro-Processor" selected>Agro-Processor / Spice Mill</option>
+                <option value="FMCG Corporate">FMCG Brand / Corporate</option>
+                <option value="Export House">International Exporter</option>
+                <option value="Modern Retail">Modern Retail / Wholesale</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Commodities Interested In</label>
+              <input type="text" class="form-control" id="buyer-form-commodities" value="Guntur Sannam Chilli, Turmeric">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Min Quantity (kg)</label>
+              <input type="number" class="form-control" id="buyer-form-minqty" value="500">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Max Quantity (kg)</label>
+              <input type="number" class="form-control" id="buyer-form-maxqty" value="10000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Quality Requirement</label>
+              <select class="form-control" id="buyer-form-quality">
+                <option value="GRADE_A" selected>Grade A (Assayed)</option>
+                <option value="GRADE_B">Grade B (Commercial)</option>
+                <option value="EXPORT_GRADE">Export Certified</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Preferred Delivery Location</label>
+              <input type="text" class="form-control" id="buyer-form-location" value="Guntur Spices Park, AP">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Payment Terms</label>
+              <input type="text" class="form-control" id="buyer-form-payment-terms" value="100% Escrow on Weighment">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Verification Status *</label>
+              <select class="form-control" id="buyer-form-status" required>
+                <option value="Verified" selected>Verified (Authorized Buyer)</option>
+                <option value="Pending Verification">Pending Verification</option>
+                <option value="Suspended">Suspended</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="gap: 10px;">
+          <button type="button" onclick="closeModal('add-bulk-buyer-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="button" onclick="handleAddBulkBuyerSubmit(event, true)" class="btn btn-accent btn-sm">Save & Create Order</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Buyer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 15. Create Purchase Order Modal -->
+  <div class="modal-overlay" id="create-order-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🛒 Create Institutional Purchase Order</h3>
+        <button onclick="closeModal('create-order-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleCreateOrderSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Verified Buyer *</label>
+            <select class="form-control" id="order-form-buyer-id" required>
+              <option value="1" selected>ITC Agri Business Division</option>
+              <option value="2">Everest Spices Ltd</option>
+              <option value="3">Olam Agro India</option>
+              <option value="4">BigBasket Wholesale</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Select Aggregated Pool *</label>
+            <select class="form-control" id="order-form-pool-id" required>
+              <option value="1" selected>POOL-0001 — Guntur Sannam Chilli Grade A (900 kg)</option>
+              <option value="2">POOL-0002 — Nizamabad Turmeric (1,200 kg)</option>
+              <option value="3">POOL-0003 — Maize Hybrid (1,500 kg)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Agreed Rate (₹/kg) *</label>
+              <input type="number" step="0.5" class="form-control" id="order-form-price" value="175.0" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Payment Terms</label>
+              <input type="text" class="form-control" id="order-form-payment-terms" value="100% Escrow on Dispatch" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Delivery Destination *</label>
+            <input type="text" class="form-control" id="order-form-delivery-location" value="ITC Agri Processing Facility, Guntur Spices Park" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('create-order-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">+ Issue Purchase Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 16. Add Pickup Modal -->
+  <div class="modal-overlay" id="add-pickup-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🚚 Schedule Consolidated Vehicle Pickup</h3>
+        <button onclick="closeModal('add-pickup-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleAddPickupSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Pooled Batch *</label>
+            <select class="form-control" id="pickup-form-pool-id" required>
+              <option value="1" selected>POOL-0001 — Guntur Sannam Chilli (900 kg)</option>
+              <option value="2">POOL-0002 — Nizamabad Turmeric (1,200 kg)</option>
+              <option value="3">POOL-0003 — Maize Hybrid (1,500 kg)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Pickup Date *</label>
+              <input type="date" class="form-control" id="pickup-form-date" value="2026-10-10" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Transporter / Fleet Partner *</label>
+              <input type="text" class="form-control" id="pickup-form-transporter" value="Andhra Agro Express" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Vehicle Type</label>
+              <select class="form-control" id="pickup-form-vehicle">
+                <option value="Eicher Pro 2049 3.5T" selected>Eicher Pro 2049 (3.5T Commercial)</option>
+                <option value="Tata Ace Gold 1.5T">Tata Ace Gold (1.5T Mini)</option>
+                <option value="Mahindra Bolero Maxi Truck 2T">Mahindra Bolero Maxi Truck (2T)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vehicle Registration No</label>
+              <input type="text" class="form-control" id="pickup-form-vehicleno" value="AP 16 TJ 4455" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Driver Phone Number</label>
+              <input type="tel" class="form-control" id="pickup-form-driverphone" value="+91 98481 22334" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Transport Cost (₹)</label>
+              <input type="number" class="form-control" id="pickup-form-cost" value="4500" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('add-pickup-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">+ Dispatch Vehicle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 17. Add Storage Facility Modal -->
+  <div class="modal-overlay" id="add-storage-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🏭 Add Partner Storage Facility</h3>
+        <button onclick="closeModal('add-storage-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleAddStorageFacilitySubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Facility Name *</label>
+              <input type="text" class="form-control" id="storage-name-input" placeholder="e.g. Tenali Modern Cold Store" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Facility Owner / Entity</label>
+              <input type="text" class="form-control" id="storage-owner-input" value="Sri Venkateswara Agro Logistics" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Facility Type</label>
+              <select class="form-control" id="storage-type-select">
+                <option value="Cold Storage" selected>Controlled Atmosphere Cold Storage</option>
+                <option value="Dry Warehouse">Certified Dry Warehouse</option>
+                <option value="Hermetic Silo">Hermetic Grain Silo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Total Capacity (MT) *</label>
+              <input type="number" class="form-control" id="storage-capacity-input" value="1500" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Location / Town *</label>
+              <input type="text" class="form-control" id="storage-location-input" value="Tenali Rural" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">District *</label>
+              <input type="text" class="form-control" id="storage-district-input" value="Guntur" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Monthly Rate (₹/Qtl/month)</label>
+              <input type="number" class="form-control" id="storage-rate-input" value="65" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Phone</label>
+              <input type="tel" class="form-control" id="storage-phone-input" value="+91 8644 223399" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Commodity Types Supported</label>
+            <input type="text" class="form-control" id="storage-commodities-input" value="Chilli, Turmeric, Pulses, Maize">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('add-storage-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">+ Save Storage Facility</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 18. Record Payment Modal -->
+  <div class="modal-overlay" id="record-payment-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">💰 Record Financial Payment / Settlement Credit</h3>
+        <button onclick="closeModal('record-payment-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleRecordPaymentSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Select Settlement Cycle *</label>
+            <select class="form-control" id="payment-form-settlement-id" required>
+              <option value="1" selected>SETTLE-0001 — POOL-0001 (₹1,48,150 Net Farmer Payout)</option>
+              <option value="2">SETTLE-0002 — POOL-0002 (₹1,85,000 Net Farmer Payout)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Payment Amount (₹) *</label>
+              <input type="number" step="1" class="form-control" id="payment-form-amount" value="148150" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Payment Method</label>
+              <select class="form-control" id="payment-form-method">
+                <option value="DIRECT_NEFT" selected>Direct NEFT Bank Transfer</option>
+                <option value="RTGS">RTGS Immediate Clearance</option>
+                <option value="ESCROW_RELEASE">Buyer Escrow Disbursement</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bank UTR / Transaction Reference *</label>
+            <input type="text" class="form-control" id="payment-form-ref" value="SBIN20261008009912" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('record-payment-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Record Payment Transfer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 19. Create Notification Modal -->
+  <div class="modal-overlay" id="create-notification-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🔔 Broadcast Role Notification</h3>
+        <button onclick="closeModal('create-notification-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleCreateNotificationSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Notification Title *</label>
+            <input type="text" class="form-control" id="notif-form-title" placeholder="e.g. Your produce lot has been weighed" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message Content *</label>
+            <textarea class="form-control" id="notif-form-message" rows="3" placeholder="Enter notification message text..." required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Target Role *</label>
+              <select class="form-control" id="notif-form-role">
+                <option value="Farmer" selected>Farmer</option>
+                <option value="Seller">Seller</option>
+                <option value="Buyer">Buyer</option>
+                <option value="FPO Admin">FPO / SHG Staff</option>
+                <option value="Logistics Partner">Logistics Partner</option>
+                <option value="Storage Partner">Storage Partner</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Priority</label>
+              <select class="form-control" id="notif-form-priority">
+                <option value="NORMAL" selected>Normal</option>
+                <option value="HIGH">High Priority</option>
+                <option value="LOW">Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('create-notification-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Send Notification</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 20. Create Selling Listing Modal -->
+  <div class="modal-overlay" id="create-listing-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🏷️ Create Commercial Selling Listing</h3>
+        <button onclick="closeModal('create-listing-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleCreateListingSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Commodity / Crop *</label>
+              <input type="text" class="form-control" id="listing-form-crop" value="Guntur Sannam Chilli Grade A" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Available Quantity (kg) *</label>
+              <input type="number" class="form-control" id="listing-form-qty" value="1200" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Min Order Qty (kg)</label>
+              <input type="number" class="form-control" id="listing-form-minqty" value="500">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expected Price (₹/kg) *</label>
+              <input type="number" step="0.5" class="form-control" id="listing-form-price" value="175.0" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Quality Grade</label>
+              <select class="form-control" id="listing-form-quality">
+                <option value="GRADE_A" selected>Grade A (Premium)</option>
+                <option value="GRADE_B">Grade B (Standard)</option>
+                <option value="EXPORT_GRADE">Export Grade</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hub / Storage Location</label>
+              <input type="text" class="form-control" id="listing-form-location" value="Kankipadu Hub, Krishna Dist">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('create-listing-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">+ Publish Listing</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 21. Submit Buyer Requirement Modal -->
+  <div class="modal-overlay" id="submit-requirement-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">📋 Submit Bulk Sourcing Requirement</h3>
+        <button onclick="closeModal('submit-requirement-modal')" class="btn-icon">✕</button>
+      </div>
+      <form onsubmit="handleSubmitRequirement(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Commodity *</label>
+              <input type="text" class="form-control" id="req-form-commodity" value="Guntur Sannam Chilli" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Required Quantity (kg) *</label>
+              <input type="number" class="form-control" id="req-form-quantity" value="2500" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Quality Grade</label>
+              <select class="form-control" id="req-form-quality">
+                <option value="Grade A" selected>Grade A (Assayed)</option>
+                <option value="Grade B">Grade B</option>
+                <option value="Export">Export Certified</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Max Price (₹/kg)</label>
+              <input type="number" step="0.5" class="form-control" id="req-form-price" value="180.0" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('submit-requirement-modal')" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Submit Sourcing Requirement</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Core Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/i18n.js"></script>
+
+  <!-- Component Scripts -->
+  <script src="/js/components/public_landing.js"></script>
+  <script src="/js/components/auth_pages.js"></script>
+  <script src="/js/components/live_stock.js"></script>
+  <script src="/js/components/market_prices.js"></script>
+  <script src="/js/components/crop_details.js"></script>
+  <script src="/js/components/field_dashboard.js"></script>
+  <script src="/js/components/admin_dashboard.js"></script>
+  <script src="/js/components/home.js"></script>
+  <script src="/js/components/farmers.js"></script>
+  <script src="/js/components/crops.js"></script>
+  <script src="/js/components/lots.js"></script>
+  <script src="/js/components/pooling.js"></script>
+  <script src="/js/components/pickup.js"></script>
+  <script src="/js/components/storage.js"></script>
+  <script src="/js/components/buyers.js"></script>
+  <script src="/js/components/orders.js"></script>
+  <script src="/js/components/payments.js"></script>
+  <script src="/js/components/finance.js"></script>
+  <script src="/js/components/farmer.js"></script>
+  <script src="/js/components/fpo.js"></script>
+  <script src="/js/components/seller_dashboard.js"></script>
+  <script src="/js/components/buyer_dashboard.js"></script>
+  <script src="/js/components/reports.js"></script>
+  <script src="/js/components/activity.js"></script>
+  <script src="/js/components/growth_plan.js"></script>
+  <script src="/js/components/settings.js"></script>
+  <script src="/js/components/notifications.js"></script>
+  <script src="/js/components/acceptance.js"></script>
+
+  <!-- Backward-compatibility aliases -->
+  <script src="/js/components/landing.js"></script>
+  <script src="/js/components/pilot.js"></script>
+  <script src="/js/components/logistics.js"></script>
+  <script src="/js/components/settlement.js"></script>
+  <script src="/js/components/analytics.js"></script>
+  <script src="/js/components/audit.js"></script>
+  <script src="/js/components/roadmap.js"></script>
+
+  <!-- Main App Controller -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

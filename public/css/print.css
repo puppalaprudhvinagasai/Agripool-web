@@ -1,0 +1,21 @@
+/* public/css/print.css - Printable receipts and lot passports */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .sidebar, .top-header, .btn, .role-switcher-dropdown, .toast-container {
+    display: none !important;
+  }
+  .main-layout {
+    margin-left: 0 !important;
+  }
+  .page-body {
+    padding: 0 !important;
+  }
+  .passport-card, .waterfall-box, .card {
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}

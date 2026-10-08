@@ -1,0 +1,20 @@
+{
+  "name": "agripool-platform",
+  "version": "1.0.0",
+  "description": "Software-first Agriculture Produce Aggregation & Settlement Platform for Smallholder Farmers and FPOs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node db/seed.js"
+  },
+  "keywords": [
+    "agriculture",
+    "agritech",
+    "fpo",
+    "produce-aggregation",
+    "settlement-ledger",
+    "digital-lot"
+  ],
+  "author": "AgriPool Technologies",
+  "license": "UNLICENSED"
+}
